@@ -5,12 +5,23 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "redux": "^4.0.4",
+    "redux-promise-middleware": "^6.1.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start-js": "react-scripts start",
+    "start": "sh -ac '. ./.env; npm run all'",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "build/prod": "sh -ac '. ./.env.production; npm run build'",
     "test": "react-scripts test",
+    "build-css": "node-sass-chokidar ./src/ --output ./src/",
+    "watch-css": "node-sass-chokidar ./src/ --output ./src/ --watch",
+    "all": "npm-run-all --parallel watch-css start-js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
